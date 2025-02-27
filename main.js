@@ -220,21 +220,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 guessedWords.push([]);
                 
             })
-            // .catch(() => {
-            //     let wordNotFoundModal = document.getElementById("modal-word-not-found");
-            //     wordNotFoundModal.style.visibility = "hidden";
-            //     wordNotFoundModal.classList.add("animate__animated");
-            //     wordNotFoundModal.classList.add("animate__bounceInDown");
-            //     wordNotFoundModal.style.visibility = "visible";
-            //     setTimeout(() => {
-            //         wordNotFoundModal.classList.remove("animate__bounceInDown");
-            //         wordNotFoundModal.classList.add("animate__bounceOutUp");
-            //         setTimeout(() => {
-            //             wordNotFoundModal.style.visibility = "hidden";
-            //             wordNotFoundModal.classList.remove("animate__bounceOutUp");
-            //         }, 1000)
-            //     }, 2000)
-            // });
+            .catch(() => {
+                let wordNotFoundModal = document.getElementById("modal-word-not-found");
+                wordNotFoundModal.style.visibility = "hidden";
+                wordNotFoundModal.classList.add("animate__animated");
+                wordNotFoundModal.classList.add("animate__bounceInDown");
+                wordNotFoundModal.style.visibility = "visible";
+                setTimeout(() => {
+                    wordNotFoundModal.classList.remove("animate__bounceInDown");
+                    wordNotFoundModal.classList.add("animate__bounceOutUp");
+                    setTimeout(() => {
+                        wordNotFoundModal.style.visibility = "hidden";
+                        wordNotFoundModal.classList.remove("animate__bounceOutUp");
+                    }, 1000)
+                }, 2000)
+            });
       }
     
 
