@@ -6,16 +6,12 @@
 html, body {
     height: 100%;
     font-family: Calibri, sans-serif;
-    background-color: #4a754d;
-    overflow-y: hidden;
-}
-
-body {
     background: linear-gradient(-45deg, #4a754d, #4a754d, #6fb675, 
                                 #4a754d, #4a754d);
     background-size: 400% 400%;
 	animation: gradient 25s ease infinite;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 @keyframes gradient {
