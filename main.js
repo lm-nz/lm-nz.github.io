@@ -1,0 +1,269 @@
+document.addEventListener("DOMContentLoaded", () => {
+    createSquares();
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const answer_encrypted = urlParams.get("word");
+    
+    let answer_decrypted = ""
+
+
+    answer_decrypted = "";
+    for (let i=0; i<5; i++) {
+        switch (answer_encrypted[i]) {
+            case "h": answer_decrypted += "a"; break;
+            case "i": answer_decrypted += "b"; break;
+            case "t": answer_decrypted += "c"; break;
+            case "I": answer_decrypted += "d"; break;
+            case "s": answer_decrypted += "e"; break;
+            case "H": answer_decrypted += "f"; break;
+            case "N": answer_decrypted += "g"; break;
+            case "c": answer_decrypted += "h"; break;
+            case "r": answer_decrypted += "i"; break;
+            case "y": answer_decrypted += "j"; break;
+            case "L": answer_decrypted += "k"; break;
+            case "T": answer_decrypted += "l"; break;
+            case "o": answer_decrypted += "m"; break;
+            case "F": answer_decrypted += "n"; break;
+            case "S": answer_decrypted += "o"; break;
+            case "u": answer_decrypted += "p"; break;
+            case "C": answer_decrypted += "q"; break;
+            case "k": answer_decrypted += "r"; break;
+            case "D": answer_decrypted += "s"; break;
+            case "z": answer_decrypted += "t"; break;
+            case "B": answer_decrypted += "u"; break;
+            case "J": answer_decrypted += "v"; break;
+            case "R": answer_decrypted += "w"; break;
+            case "Q": answer_decrypted += "x"; break;
+            case "q": answer_decrypted += "y"; break;
+            case "j": answer_decrypted += "z"; break;
+            default: answer_decrypted += "a"; break;
+        }
+    }
+    
+
+    const answer = answer_decrypted;
+    
+
+    let guessedWords = [[]];
+    let availableSpace = 1;
+
+    let guessedWordCount = 0;
+
+    const keys = document.querySelectorAll(".keyboard-row button");
+
+
+    function getCurrentWordArray() {
+        const numberOfGuesses = guessedWords.length
+        return guessedWords[numberOfGuesses-1]
+    }
+
+    function updateGuessedWords(letter) {
+        const currentWordArray = getCurrentWordArray()
+
+        if (currentWordArray && currentWordArray.length < 5) {
+            currentWordArray.push(letter);
+
+            const availableSpaceEl = document.getElementById(String(availableSpace));
+            availableSpace++;
+
+            availableSpaceEl.textContent = letter;
+        }
+    }
+
+
+    function getTileColour(letter, index, currentWordArray) {
+        for (let i=0; i<5; i++) {
+            if (currentWordArray[i] == answer[i]) {
+                answer_lettersLeft[i] = ""
+            }
+        }
+
+        if (letter == answer[index]) {
+            answer_lettersLeft[index] = ""
+            return "#70cd5a"; // GREEN
+        }
+
+        if (!answer_lettersLeft.includes(letter)) {
+            return "#a6a6a6"; // GREY
+        }
+
+        pos = answer_lettersLeft.indexOf(letter)
+        answer_lettersLeft[pos] = ""
+        return "#d49e39"; // YELLOW
+
+    }
+
+
+    function handleSubmitWord() {
+        const currentWordArray = getCurrentWordArray();
+        if (currentWordArray.length !== 5) {
+            let wordNotFoundModal = document.getElementById("modal-word-too-short");
+            wordNotFoundModal.style.visibility = "hidden";
+            wordNotFoundModal.classList.add("animate__animated");
+            wordNotFoundModal.classList.add("animate__bounceInDown");
+            wordNotFoundModal.style.visibility = "visible";
+            setTimeout(() => {
+                wordNotFoundModal.classList.remove("animate__bounceInDown");
+                wordNotFoundModal.classList.add("animate__bounceOutUp");
+                setTimeout(() => {
+                    wordNotFoundModal.style.visibility = "hidden";
+                    wordNotFoundModal.classList.remove("animate__bounceOutUp");
+                }, 1000)
+            }, 2000)
+          return;
+        }
+    
+        const currentWord = currentWordArray.join("");
+    
+        fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
+            method: "GET",
+            headers: {
+                "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+                "x-rapidapi-key": "5e88460b01mshfa76f48dcb05e71p139dfcjsn3ad91ca1de1c",
+            },
+            })
+            .then((res) => {
+                if ((!res.ok) && (currentWord != answer)) {
+                throw Error();
+                }   
+
+                const firstLetterId = guessedWordCount * 5 + 1;
+                const interval = 100;
+
+                answer_lettersLeft = answer.split("");
+                
+                currentWordArray.forEach((letter, index) => {
+                    setTimeout(() => {
+                        const tileColour = getTileColour(letter, index, currentWordArray);
+            
+                        const letterEl = document.getElementById(firstLetterId + index);
+                        const keyEl = document.getElementById(`key-${currentWordArray[index]}`);
+                        letterEl.classList.add("animate__bounce");
+                        setTimeout(() => {
+                            letterEl.style = `background-color:${tileColour}`
+                            keyBack = String(window.getComputedStyle(keyEl, null).getPropertyValue("background-color"));
+                            if (keyBack != "rgb(112, 205, 90)") {
+                                if (keyBack =! "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
+                                    keyEl.style = `background-color:${tileColour}`;
+                                }
+                                else if (tileColour == "#70cd5a") {
+                                    keyEl.style = `background-color:${tileColour}`;
+                                }
+                            }
+                            console.log(index)
+                        }, (interval*index)/2)
+                    }, interval);
+                })
+
+                guessedWordCount++;
+
+                enterKey = document.getElementById("key-enter");
+                enterKey.removeAttribute("disabled")
+
+                if (currentWord == answer) {
+                    keyboard = document.getElementById("keyboard-container").childNodes;
+                    keyboard.forEach((row) => {
+                        row.childNodes.forEach((key) => {
+                            key.disabled = true;
+                        })
+                    });
+                }
+
+                else if (guessedWords.length == 6) {
+                window.alert(`You ran out of guesses! The answer was ${answer}.`);
+                }
+        
+                guessedWords.push([]);
+                
+            })
+            .catch(() => {
+                let wordNotFoundModal = document.getElementById("modal-word-not-found");
+                wordNotFoundModal.style.visibility = "hidden";
+                wordNotFoundModal.classList.add("animate__animated");
+                wordNotFoundModal.classList.add("animate__bounceInDown");
+                wordNotFoundModal.style.visibility = "visible";
+                setTimeout(() => {
+                    wordNotFoundModal.classList.remove("animate__bounceInDown");
+                    wordNotFoundModal.classList.add("animate__bounceOutUp");
+                    setTimeout(() => {
+                        wordNotFoundModal.style.visibility = "hidden";
+                        wordNotFoundModal.classList.remove("animate__bounceOutUp");
+                    }, 1000)
+                }, 2000)
+            });
+      }
+    
+
+
+    function createSquares() {
+        const gameBoard = document.getElementById("board")
+
+        for (let i = 0; i < 30; i++) {
+            let square = document.createElement("div");
+            square.classList.add("square");
+            square.classList.add("animate__animated")
+            
+            square.setAttribute("id", i+1);
+            gameBoard.appendChild(square); 
+        }
+    }
+
+    function handleDeleteLetter() {
+        const currentWordArray = getCurrentWordArray();
+
+        if (currentWordArray.length != 0){
+            currentWordArray.pop();
+        
+            guessedWords[guessedWords.length-1] = currentWordArray;
+        
+            const lastLetterEl = document.getElementById(String(availableSpace-1));
+        
+            lastLetterEl.textContent = "";
+            availableSpace--;
+        }  
+    } 
+
+    for (let i = 0; i < keys.length; i++) {
+        keys[i].onclick = ({target}) => {
+            const letter = target.getAttribute("data-key");
+
+            if (letter == "enter") {
+                enterKey = document.getElementById("key-enter");
+                enterKey.disabled = true
+                handleSubmitWord();
+                return;
+            }
+
+            if (letter == "del") {
+                handleDeleteLetter();
+                return;
+            }
+
+            updateGuessedWords(letter);
+            enterKey = document.getElementById("key-enter");
+            if (enterKey.disabled == true) {
+                enterKey.removeAttribute("disabled")
+            }
+        }
+    }
+
+    document.addEventListener("keydown", (event) => {
+        let key = String(event.key).toLowerCase()
+        if ((["a","b","c","d","e","f",
+              "g","h","i","j","k","l","m",
+              "n","o","p","q","r","s","t",
+              "u","v","w","x","y","z"
+        ]).includes(key)) {
+            updateGuessedWords(key);
+        }
+        else if (key == "backspace") {
+            handleDeleteLetter()
+        }
+        else if (key == "enter") {
+            handleSubmitWord()
+        }
+    })
+});
+

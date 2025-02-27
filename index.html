@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilkins Wordle</title>
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+</head>
+<body>
+    
+    <div id="container">
+        <div class="infobox">
+            <h2>How to Play</h2>
+            <p>You have 6 guesses to find a 5-letter word.</p>
+            <p><br></p>
+            <p>When you guess a word, each letter will be marked as a colour:</p>
+            <p>If the letter is green, it's in the right spot,</p>
+            <p>if the letter is yellow, it's in the word, but not in that spot,</p>
+            <p>and if the letter is grey, it's not in the word.</p>
+            <p><br></p>
+            <p>Once you have guessed (or failed to guess) the word, your score will be automatically submitted</p>
+        </div>
+
+        <div class="modal" id="modal-word-not-found">
+            <div class="modal-header">
+                <h2>Word Not Found</h2>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-word-too-short">
+            <div class="modal-header">
+                <h2>Word Too Short</h2>
+            </div>
+        </div>
+
+        <div id="game">
+            <header>
+                <h1 class="title">WILKINS WORDLE</h1>
+            </header>
+
+            <div id="board-container">
+                <div id="board"></div>
+            </div>
+
+            <div id="keyboard-container">
+                <div class="keyboard-row">
+                    <button data-key="q" id="key-q">Q</button>
+                    <button data-key="w" id="key-w">W</button>
+                    <button data-key="e" id="key-e">E</button>
+                    <button data-key="r" id="key-r">R</button>
+                    <button data-key="t" id="key-t">T</button>
+                    <button data-key="y" id="key-y">Y</button>
+                    <button data-key="u" id="key-u">U</button>
+                    <button data-key="i" id="key-i">I</button>
+                    <button data-key="o" id="key-o">O</button>
+                    <button data-key="p" id="key-p">P</button>
+                </div>
+                <div class="keyboard-row">
+                    <div class="spacer-half"></div>
+                    <button data-key="a" id="key-a">A</button>
+                    <button data-key="s" id="key-s">S</button>
+                    <button data-key="d" id="key-d">D</button>
+                    <button data-key="f" id="key-f">F</button>
+                    <button data-key="g" id="key-g">G</button>
+                    <button data-key="h" id="key-h">H</button>
+                    <button data-key="j" id="key-j">J</button>
+                    <button data-key="k" id="key-k">K</button>
+                    <button data-key="l" id="key-l">L</button>
+                    <div class="spacer-half"></div>
+                </div>
+                <div class="keyboard-row">
+                    <button data-key="enter" class="wide-button" id="key-enter">ENTER</button>
+                    <button data-key="z" id="key-z">Z</button>
+                    <button data-key="x" id="key-x">X</button>
+                    <button data-key="c" id="key-c">C</button>
+                    <button data-key="v" id="key-v">V</button>
+                    <button data-key="b" id="key-b">B</button>
+                    <button data-key="n" id="key-n">N</button>
+                    <button data-key="m" id="key-m">M</button>
+                    <button data-key="del" class="wide-button" id="key-del">DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
