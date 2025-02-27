@@ -284,3 +284,15 @@ header {
 #generate-open-button {
     text-decoration: none;
 }
+
+#body-404 {
+    text-align: center;
+    display: block;
+    padding: 20%;
+}
+
+#title-404 {
+    margin: auto;
+    font-size: 3rem;
+    color: #eeeeee;
+}
