@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createSquares();
 
     let gameFinised = false;
+    let enterCooldown= false;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -109,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function handleSubmitWord() {
+        enterKey = document.getElementById("key-enter");
+        enterKey.disabled = true;
         const currentWordArray = getCurrentWordArray();
         if (currentWordArray.length !== 5) {
             let wordNotFoundModal = document.getElementById("modal-word-too-short");
@@ -272,8 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const letter = target.getAttribute("data-key");
 
             if (letter == "enter") {
-                enterKey = document.getElementById("key-enter");
-                enterKey.disabled = true
                 handleSubmitWord();
                 return;
             }
@@ -303,8 +304,12 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (key == "backspace" && gameFinised == false) {
             handleDeleteLetter()
         }
-        else if (key == "enter"  && gameFinised == false) {
-            handleSubmitWord()
+        else if (key == "enter"  && gameFinised == false && enterCooldown == false) {
+            enterCooldown = true;
+            handleSubmitWord();
+            setTimeout(() => {
+                enterCooldown = false;
+            }, 1000);
         }
     })
 });
