@@ -48,6 +48,17 @@
         }
         let textPut = document.getElementById("encrypted-word");
         textPut.textContent = answer_encrypted;
+
+        let button = document.getElementById("generate-open-button");
+        button.href = `./?word=${answer_encrypted}`;
+    }
+
+    function winCopy() {
+        resultsString = document.getElementById("modal-guessed-header-p").textContent;
+        navigator.clipboard.writeText(resultsString);
+
+        button = document.getElementById("modal-guessed-copy-button");
+        button.textContent = "Results copied!"
     }
 </script>
 <body>
@@ -66,6 +77,7 @@
             <div id="generate-input-container">
                 <h2>Encrypted Word:</h2>
                 <h3 id="encrypted-word"><i>Enter a word...</i></h3>
+                <a id="generate-open-button"><button id="generate-input-button">Open Word</button></a>
             </div>
         </div>
     </div>

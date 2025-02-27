@@ -267,14 +267,20 @@ header {
     font-size: 1.3rem;
     margin: auto;
     margin-top: 1%;
+    padding: 3px;
 }
 
 #generate-input-button:hover {
     cursor: pointer;
+    background-color: #a8a8a8;
 }
 
 #generate-input-container {
     margin: auto;
     width: 50%;
     color: #eeeeee;
+}
+
+#generate-open-button {
+    text-decoration: none;
 }
