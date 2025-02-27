@@ -166,6 +166,7 @@ header {
     top: 7%;
     background-color: #35b33f;
     width: fit-content;
+    max-width: 80%;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
