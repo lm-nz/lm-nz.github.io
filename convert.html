@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilkins Wordle | Convert</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        vertical-align: middle;
+    }
+</style>
+<script>
+    function encryt() {
+        answer_decrypted = document.getElementById("generate-input").value;
+        answer_encrypted = ""
+        for (let i=0; i<5; i++) {
+            switch (answer_decrypted[i]) {
+                case "a": answer_encrypted += "h"; break;
+                case "b": answer_encrypted += "i"; break;
+                case "c": answer_encrypted += "t"; break;
+                case "d": answer_encrypted += "I"; break;
+                case "e": answer_encrypted += "s"; break;
+                case "f": answer_encrypted += "H"; break;
+                case "g": answer_encrypted += "N"; break;
+                case "h": answer_encrypted += "c"; break;
+                case "i": answer_encrypted += "r"; break;
+                case "j": answer_encrypted += "y"; break;
+                case "k": answer_encrypted += "L"; break;
+                case "l": answer_encrypted += "T"; break;
+                case "m": answer_encrypted += "o"; break;
+                case "n": answer_encrypted += "F"; break;
+                case "o": answer_encrypted += "S"; break;
+                case "p": answer_encrypted += "u"; break;
+                case "q": answer_encrypted += "C"; break;
+                case "r": answer_encrypted += "k"; break;
+                case "s": answer_encrypted += "D"; break;
+                case "t": answer_encrypted += "z"; break;
+                case "u": answer_encrypted += "B"; break;
+                case "v": answer_encrypted += "J"; break;
+                case "w": answer_encrypted += "R"; break;
+                case "x": answer_encrypted += "Q"; break;
+                case "y": answer_encrypted += "q"; break;
+                case "z": answer_encrypted += "j"; break;
+                default: answer_encrypted += "a"; break;
+            }
+        }
+        let textPut = document.getElementById("encrypted-word");
+        textPut.textContent = answer_encrypted;
+    }
+</script>
+<body>
+    <div class="modal">
+        <div class="modal-header">
+            
+        </div>
+    </div>
+    <div id="generate-container">
+        <div id="generate">
+            <div id="generate-input-container">
+                <h2 id="generate-input-label">Enter a Word</h2>
+                <input type="text" id="generate-input" maxlength="5" minlength="5" placeholder="Enter a word...">
+                <button id="generate-input-button" onclick="encryt()">Encrypt</button>
+            </div>
+            <div id="generate-input-container">
+                <h2>Encrypted Word:</h2>
+                <h3 id="encrypted-word"><i>Enter a word...</i></h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
