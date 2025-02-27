@@ -35,7 +35,8 @@ body {
     height: 100%;
     align-items: center;
     flex-direction: column;
-    padding: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 #game {
