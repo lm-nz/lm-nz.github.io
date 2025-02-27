@@ -11,6 +11,21 @@
     
 </head>
 <body>
+
+    <script>
+        function winCopy() {
+            resultsString = document.getElementById("modal-guessed-header-p").textContent;
+            navigator.clipboard.writeText(resultsString);
+
+            button = document.getElementById("modal-guessed-copy-button");
+            button.textContent = "Results copied!"
+
+        }
+        function lossCopy() {
+            resultsString = document.getElementById("modal-not-guessed-header-p").textContent;
+            navigator.clipboard.writeText(resultsString);
+        }
+    </script>
     
     <div id="container">
         <div class="infobox">
@@ -21,8 +36,6 @@
             <p>If the letter is green, it's in the right spot,</p>
             <p>if the letter is yellow, it's in the word, but not in that spot,</p>
             <p>and if the letter is grey, it's not in the word.</p>
-            <p><br></p>
-            <p>Once you have guessed (or failed to guess) the word, your score will be automatically submitted</p>
         </div>
 
         <div class="modal" id="modal-word-not-found">
@@ -34,6 +47,23 @@
         <div class="modal" id="modal-word-too-short">
             <div class="modal-header">
                 <h2>Word Too Short</h2>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-word-guessed">
+            <div class="modal-header" id="modal-guessed-header">
+                <h2>Congratulations! You got the word!</h2>
+                <p id="modal-guessed-header-p"></p>
+                <button onclick="winCopy()" id="modal-guessed-copy-button">Copy Result</button>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-word-not-guessed">
+            <div class="modal-header" id="modal-not-guessed-header">
+                <h2>Sorry, you didn't get the word!</h2>
+                <p id="modal-not-guessed-header-word"></p>
+                <p id="modal-not-guessed-header-p"></p>
+                <button onclick="lossCopy()" id="modal-guessed-copy-button">Copy Result</button>
             </div>
         </div>
 

@@ -14,7 +14,7 @@ body {
     background: linear-gradient(-45deg, #4a754d, #4a754d, #6fb675, 
                                 #4a754d, #4a754d);
     background-size: 400% 400%;
-	animation: gradient 30s ease infinite;
+	animation: gradient 25s ease infinite;
     height: 100vh;
 }
 
@@ -157,6 +157,7 @@ header {
 
 .infobox:hover p {
     font-size: 1rem;
+    z-index: 100;
     transition: 150ms ease-in-out;
 }
 
@@ -172,3 +173,49 @@ header {
     z-index: 100;
     visibility: hidden;
 }
+
+.modal-header {
+    text-align: center;
+    align-content: center;
+}
+
+.modal-header p {
+    background-color: #eeeeee;
+    border-radius: 4px;
+    padding: 3px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 1%;
+    white-space: pre-wrap;
+}
+
+#modal-not-guessed-header-word {
+    background-color: transparent;
+    font-weight: bold;
+}
+
+#modal-guessed-copy-button {
+    margin-top: 1%;
+    background-color: #cfcfcf;
+    color: #2b2b2b;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+#modal-guessed-copy-button:hover {
+    background-color: #a8a8a8;
+    scale: 103%;
+}
+
+#modal-not-guessed-header-p, 
+#modal-guessed-header-p {
+    color: #2b2b2b;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+
