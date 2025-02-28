@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const answer = answer_decrypted;
     
-
+    
     let guessedWords = [[]];
     let availableSpace = 1;
 
