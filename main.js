@@ -113,7 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
         enterKey = document.getElementById("key-enter");
         enterKey.disabled = true;
         const currentWordArray = getCurrentWordArray();
-        if (currentWordArray.length !== 5) {
+
+        if (currentWordArray.length != 5) {
             let wordNotFoundModal = document.getElementById("modal-word-too-short");
             wordNotFoundModal.style.visibility = "hidden";
             wordNotFoundModal.classList.add("animate__animated");
@@ -127,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     wordNotFoundModal.classList.remove("animate__bounceOutUp");
                 }, 1000)
             }, 2000)
+            currentWordArray = [];
           return;
         }
     
