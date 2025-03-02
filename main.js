@@ -138,6 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: {
                 "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
                 "x-rapidapi-key": "5e88460b01mshfa76f48dcb05e71p139dfcjsn3ad91ca1de1c",
+                // This is a free API please just get your own key and don't steal mine :<
+                //                  -> https://www.wordsapi.com/ <-
             },
             })
             .then((res) => {
