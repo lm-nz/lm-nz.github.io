@@ -132,9 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         const currentWord = currentWordArray.join("");
-    
-        // This is a free API please just get your own key and don't steal mine :<
-        //                  -> https://www.wordsapi.com/ <-
+
         fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
             method: "GET",
             headers: {
