@@ -112,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleSubmitWord() {
         enterKey = document.getElementById("key-enter");
         enterKey.disabled = true;
-        const currentWordArray = getCurrentWordArray();
-
+        let currentWordArray = getCurrentWordArray();
         if (currentWordArray.length != 5) {
             let wordNotFoundModal = document.getElementById("modal-word-too-short");
             wordNotFoundModal.style.visibility = "hidden";
@@ -143,11 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then((res) => {
                 if ((!res.ok) && (currentWord != answer)) {
-                throw Error();
+                    throw Error();
                 }   
 
                 const firstLetterId = guessedWordCount * 5 + 1;
-                const interval = 100;
+                let interval = 65;
 
                 answer_lettersLeft = answer.split("");
                 
@@ -204,7 +203,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     wordGuessedModal.style.visibility = "visible";
                 }
 
-                else if (guessedWords.length == 6) {
+                else if (guessedWordCount == 6) {
+                    for (let i=0; i<5; i++) {
+                        getTileColour(currentWordArray[i],i,currentWordArray)
+                    }
                     let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
                     wordNotGuessedModal.style.visibility = "hidden";
                     wordNotGuessedModal.classList.add("animate__animated");
