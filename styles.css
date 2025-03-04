@@ -184,10 +184,10 @@ header {
     background-color: #eeeeee;
     border-radius: 4px;
     padding: 3px;
+    max-width: 90%;
     width: fit-content;
     margin: auto;
     margin-top: 1%;
-    white-space: pre-wrap;
 }
 
 #modal-not-guessed-header-word {
@@ -223,7 +223,9 @@ header {
     height: 100vh;
     vertical-align: middle;
     text-align: center;
-    display: flex
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 #generate {
@@ -246,14 +248,17 @@ header {
     margin: auto;
     text-align: center;
     display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #generate-input-label {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin: auto;
     text-align: center;
     color: #eeeeee;
     display: block;
+    margin-bottom: 0;
 }
 
 #generate-input-button {
@@ -266,13 +271,16 @@ header {
     width: 50%;
     font-size: 1.3rem;
     margin: auto;
-    margin-top: 1%;
     padding: 3px;
+    transition: 40ms ease-in-out;
+    margin-top: 0;
 }
 
 #generate-input-button:hover {
     cursor: pointer;
     background-color: #a8a8a8;
+    scale: 103%;
+    transition: 40ms ease-in-out;
 }
 
 #generate-input-container {

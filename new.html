@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilkins Wordle | New Word</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <style>
     body {
@@ -12,7 +13,7 @@
     }
 </style>
 <script>
-    function encryt() {
+    function encrypt() {
         answer_decrypted = document.getElementById("generate-input").value;
         answer_encrypted = ""
         for (let i=0; i<5; i++) {
@@ -46,38 +47,40 @@
                 default: answer_encrypted += "a"; break;
             }
         }
-        let textPut = document.getElementById("encrypted-word");
-        textPut.textContent = answer_encrypted;
 
-        let button = document.getElementById("generate-open-button");
-        button.href = `./?word=${answer_encrypted}`;
-    }
-
-    function winCopy() {
-        resultsString = document.getElementById("modal-guessed-header-p").textContent;
-        navigator.clipboard.writeText(resultsString);
-
-        button = document.getElementById("modal-guessed-copy-button");
-        button.textContent = "Results copied!"
+        if (answer_decrypted.length == 5){
+            window.open(`./?word=${answer_encrypted}`);
+            return
+        }
+        let wordNotFoundModal = document.getElementById("modal-word-too-short");
+        wordNotFoundModal.style.visibility = "hidden";
+        wordNotFoundModal.classList.add("animate__animated");
+        wordNotFoundModal.classList.add("animate__bounceInDown");
+        wordNotFoundModal.style.visibility = "visible";
+        setTimeout(() => {
+            wordNotFoundModal.classList.remove("animate__bounceInDown");
+            wordNotFoundModal.classList.add("animate__bounceOutUp");
+            setTimeout(() => {
+                wordNotFoundModal.style.visibility = "hidden";
+                wordNotFoundModal.classList.remove("animate__bounceOutUp");
+            }, 1000)
+        }, 2000)
+        
     }
 </script>
 <body>
-    <div class="modal">
-        <div class="modal-header">
-            
-        </div>
-    </div>
     <div id="generate-container">
+        <div class="modal" id="modal-word-too-short">
+            <div class="modal-header">
+                <h2>Word Too Short</h2>
+            </div>
+        </div>
+
         <div id="generate">
             <div id="generate-input-container">
                 <h2 id="generate-input-label">Enter a Word</h2>
-                <input type="text" id="generate-input" maxlength="5" minlength="5">
-                <button id="generate-input-button" onclick="encryt()">Encrypt</button>
-            </div>
-            <div id="generate-input-container">
-                <h2>Encrypted Word</h2>
-                <h3 id="encrypted-word"><i>Enter a word...</i></h3>
-                <a id="generate-open-button" target="_blank"><button id="generate-input-button">Open Word</button></a>
+                <input type="text" id="generate-input" maxlength="5" minlength="5" >
+                <a id="generate-open-button" target="_blank"><button id="generate-input-button" onclick="encrypt()">Open Word</button></a>
             </div>
         </div>
     </div>
