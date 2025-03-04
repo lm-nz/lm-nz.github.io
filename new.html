@@ -13,8 +13,13 @@
     }
 </style>
 <script>
-    function encrypt() {
-        answer_decrypted = document.getElementById("generate-input").value;
+    function encrypt(doRandom=false) {
+        let answer_decrypted = document.getElementById("generate-input").value;
+        if (doRandom) {
+            random = Math.floor(Math.random() * wordList.length)
+            answer_decrypted = wordList[random];
+            console.log(random, answer_decrypted)
+        }
         answer_encrypted = ""
         for (let i=0; i<5; i++) {
             switch (answer_decrypted[i]) {
@@ -53,7 +58,6 @@
             return
         }
         let wordNotFoundModal = document.getElementById("modal-word-too-short");
-        wordNotFoundModal.style.visibility = "hidden";
         wordNotFoundModal.classList.add("animate__animated");
         wordNotFoundModal.classList.add("animate__bounceInDown");
         wordNotFoundModal.style.visibility = "visible";
@@ -73,6 +77,7 @@
         });
     }
 </script>
+<script src="words.js"></script>
 <body>
     <div id="generate-container">
         <div class="modal" id="modal-word-too-short">
@@ -86,6 +91,7 @@
                 <h2 id="generate-input-label">Enter a Word</h2>
                 <input type="text" id="generate-input" maxlength="5" minlength="5" >
                 <a id="generate-open-button" target="_blank"><button id="generate-input-button" onclick="encrypt()">Open Word</button></a>
+                <a id="generate-open-button" target="_blank"><button id="generate-input-button" onclick="encrypt(true)" style="margin-top: 1%;">Generate a Random Word</button></a>
             </div>
         </div>
     </div>
