@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     let wordGuessedP = document.getElementById("modal-guessed-header-p");
                     wordGuessedP.textContent += `Wilkins Wordle: ${guessedWordCount}/6\n`
                     for (let i=0; i<guessedWordCount; i++) {
-                        wordGuessedP.textContent += results[i].join("")
+                        wordGuessedP.textContent += results[i].join("");
                         if (i != 5) {
                             wordGuessedP.textContent += "\n";
                         }
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     wordNotGuessedWord.textContent = `The word was ${answer}!`;
                     wordNotGuessedP.textContent += `Wilkins Wordle: X/6\n`
                     for (let i=0; i<guessedWordCount; i++) {
-                        wordNotGuessedP.textContent += results[i].join("")
+                        wordNotGuessedP.textContent += results[i].join("");
                         if (i != 5) {
                             wordNotGuessedP.textContent += "\n";
                         }   
