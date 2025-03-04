@@ -286,7 +286,7 @@ header {
 
 #generate-input-container {
     margin: auto;
-    width: 50%;
+    min-width: 75%;
     color: #eeeeee;
 }
 
