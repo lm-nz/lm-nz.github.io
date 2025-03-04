@@ -132,120 +132,110 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         const currentWord = currentWordArray.join("");
+        
+        try {  
+        if (!(wordList.includes(currentWord.toLowerCase())) && (currentWord != answer)) {
+            throw Error();
+        }
 
-        fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
-            method: "GET",
-            headers: {
-                "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-                "x-rapidapi-key": "5e88460b01mshfa76f48dcb05e71p139dfcjsn3ad91ca1de1c",
-            },
-            // This is a free API please just get your own key and don't steal mine :<
-            //                  -> https://www.wordsapi.com/ <-
-            })
-            .then((res) => {
-                if ((!res.ok) && (currentWord != answer)) {
-                    throw Error();
-                }   
+        const firstLetterId = guessedWordCount * 5 + 1;
+        let interval = 65;
 
-                const firstLetterId = guessedWordCount * 5 + 1;
-                let interval = 65;
-
-                answer_lettersLeft = answer.split("");
-                
-                currentWordArray.forEach((letter, index) => {
-                    setTimeout(() => {
-                        const tileColour = getTileColour(letter, index, currentWordArray);
-            
-                        const letterEl = document.getElementById(firstLetterId + index);
-                        const keyEl = document.getElementById(`key-${currentWordArray[index]}`);
-                        letterEl.classList.add("animate__bounce");
-                        setTimeout(() => {
-                            letterEl.style = `background-color:${tileColour}`
-                            keyBack = String(window.getComputedStyle(keyEl, null).getPropertyValue("background-color"));
-                            if (keyBack != "rgb(112, 205, 90)") {
-                                if (keyBack =! "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
-                                    keyEl.style = `background-color:${tileColour}`;
-                                }
-                                else if (tileColour == "#70cd5a") {
-                                    keyEl.style = `background-color:${tileColour}`;
-                                }
-                            }
-                        }, (interval*index)/2)
-                    }, interval);
-                })
-
-                guessedWordCount++;
-
-                enterKey = document.getElementById("key-enter");
-                enterKey.removeAttribute("disabled")
-
-                if (currentWord == answer) {
-                    gameFinised = true;
-                    for (let i=0; i<5; i++) {
-                        results[guessedWordCount-1][i] = "🟩";
-                    }
-                    keyboard = document.getElementById("keyboard-container").childNodes;
-                    keyboard.forEach((row) => {
-                        row.childNodes.forEach((key) => {
-                            key.disabled = true;
-                        })
-                    });
-                    let wordGuessedModal = document.getElementById("modal-word-guessed");
-                    wordGuessedModal.style.visibility = "hidden";
-                    wordGuessedModal.classList.add("animate__animated");
-                    wordGuessedModal.classList.add("animate__bounceInDown");
-                    let wordGuessedP = document.getElementById("modal-guessed-header-p");
-                    wordGuessedP.textContent += `Wilkins Wordle: ${guessedWordCount}/6\n`
-                    for (let i=0; i<guessedWordCount; i++) {
-                        wordGuessedP.textContent += results[i].join("");
-                        if (i != 5) {
-                            wordGuessedP.textContent += "\n";
+        answer_lettersLeft = answer.split("");
+        
+        currentWordArray.forEach((letter, index) => {
+            setTimeout(() => {
+                const tileColour = getTileColour(letter, index, currentWordArray);
+    
+                const letterEl = document.getElementById(firstLetterId + index);
+                const keyEl = document.getElementById(`key-${currentWordArray[index]}`);
+                letterEl.classList.add("animate__bounce");
+                setTimeout(() => {
+                    letterEl.style = `background-color:${tileColour}`
+                    keyBack = String(window.getComputedStyle(keyEl, null).getPropertyValue("background-color"));
+                    if (keyBack != "rgb(112, 205, 90)") {
+                        if (keyBack =! "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
+                            keyEl.style = `background-color:${tileColour}`;
+                        }
+                        else if (tileColour == "#70cd5a") {
+                            keyEl.style = `background-color:${tileColour}`;
                         }
                     }
-                    wordGuessedModal.style.visibility = "visible";
-                }
+                }, (interval*index)/2)
+            }, interval);
+        })
 
-                else if (guessedWordCount == 6) {
-                    for (let i=0; i<5; i++) {
-                        getTileColour(currentWordArray[i],i,currentWordArray)
-                    }
-                    let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
-                    wordNotGuessedModal.style.visibility = "hidden";
-                    wordNotGuessedModal.classList.add("animate__animated");
-                    wordNotGuessedModal.classList.add("animate__bounceInDown");
-                    let wordNotGuessedP = document.getElementById("modal-not-guessed-header-p");
-                    let wordNotGuessedWord = document.getElementById("modal-not-guessed-header-word")
-                    wordNotGuessedWord.textContent = `The word was ${answer}!`;
-                    wordNotGuessedP.textContent += `Wilkins Wordle: X/6\n`
-                    for (let i=0; i<guessedWordCount; i++) {
-                        wordNotGuessedP.textContent += results[i].join("");
-                        if (i != 5) {
-                            wordNotGuessedP.textContent += "\n";
-                        }   
-                    }
-                    wordNotGuessedModal.style.visibility = "visible";
-                }
-        
-                guessedWords.push([]);
-                
-            })
-            .catch(() => {
-                let wordNotFoundModal = document.getElementById("modal-word-not-found");
-                wordNotFoundModal.style.visibility = "hidden";
-                wordNotFoundModal.classList.add("animate__animated");
-                wordNotFoundModal.classList.add("animate__bounceInDown");
-                wordNotFoundModal.style.visibility = "visible";
-                setTimeout(() => {
-                    wordNotFoundModal.classList.remove("animate__bounceInDown");
-                    wordNotFoundModal.classList.add("animate__bounceOutUp");
-                    setTimeout(() => {
-                        wordNotFoundModal.style.visibility = "hidden";
-                        wordNotFoundModal.classList.remove("animate__bounceOutUp");
-                    }, 1000)
-                }, 2000)
+        guessedWordCount++;
+
+        enterKey = document.getElementById("key-enter");
+        enterKey.removeAttribute("disabled")
+
+        if (currentWord == answer) {
+            gameFinised = true;
+            for (let i=0; i<5; i++) {
+                results[guessedWordCount-1][i] = "🟩";
+            }
+            keyboard = document.getElementById("keyboard-container").childNodes;
+            keyboard.forEach((row) => {
+                row.childNodes.forEach((key) => {
+                    key.disabled = true;
+                })
             });
-      }
-    
+            let wordGuessedModal = document.getElementById("modal-word-guessed");
+            wordGuessedModal.style.visibility = "hidden";
+            wordGuessedModal.classList.add("animate__animated");
+            wordGuessedModal.classList.add("animate__bounceInDown");
+            let wordGuessedP = document.getElementById("modal-guessed-header-p");
+            wordGuessedP.textContent += `Wilkins Wordle: ${guessedWordCount}/6\n`
+            for (let i=0; i<guessedWordCount; i++) {
+                wordGuessedP.textContent += results[i].join("");
+                if (i != 5) {
+                    wordGuessedP.textContent += "\n";
+                }
+            }
+            wordGuessedModal.style.visibility = "visible";
+        }
+
+        else if (guessedWordCount == 6) {
+            for (let i=0; i<5; i++) {
+                getTileColour(currentWordArray[i],i,currentWordArray)
+            }
+            let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
+            wordNotGuessedModal.style.visibility = "hidden";
+            wordNotGuessedModal.classList.add("animate__animated");
+            wordNotGuessedModal.classList.add("animate__bounceInDown");
+            let wordNotGuessedP = document.getElementById("modal-not-guessed-header-p");
+            let wordNotGuessedWord = document.getElementById("modal-not-guessed-header-word")
+            wordNotGuessedWord.textContent = `The word was ${answer}!`;
+            wordNotGuessedP.textContent += `Wilkins Wordle: X/6\n`
+            for (let i=0; i<guessedWordCount; i++) {
+                wordNotGuessedP.textContent += results[i].join("");
+                if (i != 5) {
+                    wordNotGuessedP.textContent += "\n";
+                }   
+            }
+            wordNotGuessedModal.style.visibility = "visible";
+        }
+
+        guessedWords.push([]);
+        }
+        catch {
+            let wordNotFoundModal = document.getElementById("modal-word-not-found");
+            wordNotFoundModal.style.visibility = "hidden";
+            wordNotFoundModal.classList.add("animate__animated");
+            wordNotFoundModal.classList.add("animate__bounceInDown");
+            wordNotFoundModal.style.visibility = "visible";
+            setTimeout(() => {
+                wordNotFoundModal.classList.remove("animate__bounceInDown");
+                wordNotFoundModal.classList.add("animate__bounceOutUp");
+                setTimeout(() => {
+                    wordNotFoundModal.style.visibility = "hidden";
+                    wordNotFoundModal.classList.remove("animate__bounceOutUp");
+                }, 1000)
+            }, 2000)
+        }
+    }
+        
 
 
     function createSquares() {
@@ -317,6 +307,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 enterCooldown = false;
             }, 1000);
         }
-    })
+    });
 });
-
