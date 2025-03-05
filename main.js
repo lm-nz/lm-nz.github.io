@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         letterEl.style = `background-color:${tileColour}`
                         keyBack = String(window.getComputedStyle(keyEl, null).getPropertyValue("background-color"));
                         if (keyBack != "rgb(112, 205, 90)") {
-                            if (keyBack =! "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
+                            if (keyBack != "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
                                 keyEl.style = `background-color:${tileColour}`;
                             }
                             else if (tileColour == "#70cd5a") {
@@ -202,9 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             else if (guessedWordCount == 6) {
                 for (let i=0; i<5; i++) {
-                    const tileColour = getTileColour(currentWordArray[i],i,currentWordArray);
                     const letterEl = document.getElementById(firstLetterId + i);
-                    letterEl.style = `background-color:${tileColour}`;
+                    const tileColour = getTileColour(currentWordArray[i],i,currentWordArray);
+                    letterEl.style.backgroundColor = tileColour;
                 }
                 let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
                 wordNotGuessedModal.style.visibility = "hidden";
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
             guessedWords.push([]);
         }
         catch (e){
-            console.log(e)
+            console.log(e);
             let wordNotFoundModal = document.getElementById("modal-word-not-found");
             wordNotFoundModal.style.visibility = "hidden";
             wordNotFoundModal.classList.add("animate__animated");
@@ -249,7 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let square = document.createElement("div");
             square.classList.add("square");
             square.classList.add("animate__animated");
-            
             square.setAttribute("id", i+1);
             gameBoard.appendChild(square); 
         }
