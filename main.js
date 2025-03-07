@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentWord = currentWordArray.join("");
         
         try {  
-            if (!(wordList.includes(currentWord.toLowerCase())) && (currentWord != answer)) {
+            if (!(guessableWords.includes(currentWord.toLowerCase())) && (currentWord != answer)) {
                 throw Error();
             }
 
@@ -158,13 +158,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         letterEl.style = `background-color:${tileColour}`
                         keyBack = String(window.getComputedStyle(keyEl, null).getPropertyValue("background-color"));
                         if (keyBack != "rgb(112, 205, 90)") {
-                            if (keyBack != "rgb(207, 207, 207)" || keyBack!= "rgb(212, 158, 57)") {
+                            if (keyBack != "rgb(166, 166, 166)" && keyBack != "rgb(212, 158, 57)") {
                                 keyEl.style = `background-color:${tileColour}`;
                             }
+                            else if (tileColour == "#d49e39") {
+                                keyEl.style = `background-color:${tileColour}`;
+                            }   
                             else if (tileColour == "#70cd5a") {
                                 keyEl.style = `background-color:${tileColour}`;
                             }
                         }
+                        
                     }, (interval*index)/2)
                 }, interval);
             })
