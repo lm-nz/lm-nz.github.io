@@ -14,7 +14,7 @@
 </style>
 <script>
     function encrypt(doRandom=false) {
-        let answer_decrypted = document.getElementById("generate-input").value;
+        let answer_decrypted = document.getElementById("generate-input").value.toLowerCase();
         if (doRandom) {
             random = Math.floor(Math.random() * wordList.length)
             answer_decrypted = wordList[random];
