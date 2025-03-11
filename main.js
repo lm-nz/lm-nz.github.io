@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 wordTooShortModal.classList.remove("animate__bounceInDown");
                 wordTooShortModal.classList.add("animate__bounceOutUp");
-            }, 2000)
+            }, 1250)
             wordTooShortModal.classList.remove("animate__bounceOutUp");
             currentWordArray = [];
           return;
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 wordNotFoundModal.classList.remove("animate__bounceInDown");
                 wordNotFoundModal.classList.add("animate__bounceOutUp");
-            }, 2000)
+            }, 1250)
             wordNotFoundModal.classList.remove("animate__bounceOutUp");
         }
     }
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
             handleSubmitWord();
             setTimeout(() => {
                 enterCooldown = false;
-            }, 1000);
+            }, 750);
         }
     });
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wilkins Wordle | New Word</title>
+    <title>Wilkins Wordle | New Game</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
@@ -58,24 +58,31 @@
             return
         }
         let wordNotFoundModal = document.getElementById("modal-word-too-short");
+        wordNotFoundModal.style.visibility = "hidden";
         wordNotFoundModal.classList.add("animate__animated");
         wordNotFoundModal.classList.add("animate__bounceInDown");
         wordNotFoundModal.style.visibility = "visible";
         setTimeout(() => {
             wordNotFoundModal.classList.remove("animate__bounceInDown");
             wordNotFoundModal.classList.add("animate__bounceOutUp");
-            setTimeout(() => {
-                wordNotFoundModal.style.visibility = "hidden";
-                wordNotFoundModal.classList.remove("animate__bounceOutUp");
-            }, 1000)
-        }, 2000)
+        }, 1250)
+        wordNotFoundModal.classList.remove("animate__bounceOutUp");
         
         document.addEventListener("keydown", (event) => {
             if (String(event.key).toLowerCase() == "enter") {
-                encrypt()
+                encrypt();
             }
         });
     }
+
+    function highlightButton() {
+        button = document.getElementById("generate-input-button");
+
+        button.style = "background: linear-gradient(90deg, #cfcfcf, #cfcfcf, #b4eeb9, #cfcfcf, #cfcfcf); background-size: 400% 400%; animation: gradient 6s ease infinite;";
+
+        
+    }
+
 </script>
 <script src="words.js"></script>
 <body>
@@ -88,11 +95,11 @@
 
         <div id="generate">
             <div id="generate-input-container">
-                <h2 id="generate-input-label">Enter a Word</h2>
-                <input type="text" id="generate-input" maxlength="5" minlength="5" >
+                <h2 id="generate-input-label">Create a Game</h2>
+                <input type="text" id="generate-input" maxlength="5" minlength="5" placeholder="Enter a 5 letter word..." oninput="highlightButton()">
                 <a id="generate-open-button" target="_blank"><button id="generate-input-button" onclick="encrypt()">Open Word</button></a>
                 <p><b>OR</b></p>
-                <a id="generate-open-button" target="_blank"><button id="generate-input-button" onclick="encrypt(true)">Generate a Random Word</button></a>
+                <a id="generate-open-button" target="_blank"><button id="generate-random-button" onclick="encrypt(true)">Generate a Random Word</button></a>
             </div>
         </div>
     </div>

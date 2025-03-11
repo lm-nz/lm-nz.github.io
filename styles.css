@@ -254,6 +254,11 @@ header {
     text-transform: lowercase;
 }
 
+#generate-input::placeholder {
+    font-size: 1.2rem;
+    text-transform: none;
+}
+
 #generate-input-label {
     font-size: 2.4rem;
     margin: auto;
@@ -263,7 +268,7 @@ header {
     margin-bottom: 0;
 }
 
-#generate-input-button {
+#generate-input-button, #generate-random-button {
     display: block;
     text-align: center;
     background-color: #cfcfcf;
@@ -278,7 +283,7 @@ header {
     margin-top: 0;
 }
 
-#generate-input-button:hover {
+#generate-input-button:hover, #generate-random-button:hover {
     cursor: pointer;
     background-color: #a8a8a8;
     scale: 103%;
