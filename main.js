@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
+
     const answer_encrypted = urlParams.get("word");
 
     let results = [["","","","",""],
