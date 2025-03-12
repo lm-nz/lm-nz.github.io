@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const answer = answer_decrypted;
+    let answer_lettersLeft = answer.split("")
     
     
     let guessedWords = [[]];
@@ -190,42 +191,42 @@ document.addEventListener("DOMContentLoaded", () => {
                         key.disabled = true;
                     })
                 });
-                let wordGuessedModal = document.getElementById("modal-word-guessed");
-                wordGuessedModal.style.visibility = "hidden";
-                wordGuessedModal.classList.add("animate__animated");
-                wordGuessedModal.classList.add("animate__bounceInDown");
-                let wordGuessedP = document.getElementById("modal-guessed-header-p");
-                wordGuessedP.textContent += `Wilkins Wordle: ${guessedWordCount}/6\n`
-                for (let i=0; i<guessedWordCount; i++) {
-                    wordGuessedP.textContent += results[i].join("");
-                    if (i != 5) {
-                        wordGuessedP.textContent += "\n";
+                setTimeout(() => {
+                    let wordGuessedModal = document.getElementById("modal-word-guessed");
+                    wordGuessedModal.style.visibility = "hidden";
+                    wordGuessedModal.classList.add("animate__animated");
+                    wordGuessedModal.classList.add("animate__bounceInDown");
+                    let wordGuessedP = document.getElementById("modal-guessed-header-p");
+                    wordGuessedP.textContent += `Wilkins Wordle: ${guessedWordCount}/6\n`
+                    for (let i=0; i<guessedWordCount; i++) {
+                        wordGuessedP.textContent += results[i].join("");
+                        if (i != 5) {
+                            wordGuessedP.textContent += "\n";
+                        }
                     }
-                }
-                wordGuessedModal.style.visibility = "visible";
+                    wordGuessedModal.style.visibility = "visible";
+                }, 300)
             }
 
             else if (guessedWordCount == 6) {
-                for (let i=0; i<5; i++) {
-                    const letterEl = document.getElementById(firstLetterId + i);
-                    const tileColour = getTileColour(currentWordArray[i],i,currentWordArray);
-                    letterEl.style.backgroundColor = tileColour;
-                }
-                let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
-                wordNotGuessedModal.style.visibility = "hidden";
-                wordNotGuessedModal.classList.add("animate__animated");
-                wordNotGuessedModal.classList.add("animate__bounceInDown");
-                let wordNotGuessedP = document.getElementById("modal-not-guessed-header-p");
-                let wordNotGuessedWord = document.getElementById("modal-not-guessed-header-word")
-                wordNotGuessedWord.textContent = `The word was ${answer}!`;
-                wordNotGuessedP.textContent += `Wilkins Wordle: X/6\n`
-                for (let i=0; i<guessedWordCount; i++) {
-                    wordNotGuessedP.textContent += results[i].join("");
-                    if (i != 5) {
-                        wordNotGuessedP.textContent += "\n";
-                    }   
-                }
-                wordNotGuessedModal.style.visibility = "visible";
+                setTimeout(() => {
+                    let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
+                    wordNotGuessedModal.style.visibility = "hidden";
+                    wordNotGuessedModal.classList.add("animate__animated");
+                    wordNotGuessedModal.classList.add("animate__bounceInDown");
+                    let wordNotGuessedP = document.getElementById("modal-not-guessed-header-p");
+                    let wordNotGuessedWord = document.getElementById("modal-not-guessed-header-word")
+                    wordNotGuessedWord.textContent = `The word was ${answer}!`;
+                    wordNotGuessedP.textContent += `Wilkins Wordle: X/6\n`
+                    for (let i=0; i<guessedWordCount; i++) {
+                        wordNotGuessedP.textContent += results[i].join("");
+                        if (i != 5) {
+                            wordNotGuessedP.textContent += "\n";
+                        }   
+                    }
+                    wordNotGuessedModal.style.visibility = "visible";
+                }, 300)
+                
             }
 
             guessedWords.push([]);
@@ -302,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "g","h","i","j","k","l","m",
               "n","o","p","q","r","s","t",
               "u","v","w","x","y","z"
-        ]).includes(key) && gameFinised == false) {
+        ].includes(key)) && gameFinised == false) {
             updateGuessedWords(key);
         }
         else if (key == "backspace" && gameFinised == false) {
@@ -313,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
             handleSubmitWord();
             setTimeout(() => {
                 enterCooldown = false;
-            }, 750);
+            }, 500);
         }
     });
 });
