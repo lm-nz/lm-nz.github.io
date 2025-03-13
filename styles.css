@@ -125,7 +125,7 @@ header {
 
 .keyboard-row button:hover, 
 .keyboard-row button.wide-button:hover {
-    background-color: #a8a8a8;
+    /* background-color: #a8a8a8; */
     scale: 103%;
     transition: 70ms ease-in-out;
 }
