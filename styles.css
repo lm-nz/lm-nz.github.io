@@ -125,7 +125,6 @@ header {
 
 .keyboard-row button:hover, 
 .keyboard-row button.wide-button:hover {
-    /* background-color: #a8a8a8; */
     scale: 103%;
     transition: 70ms ease-in-out;
 }
@@ -207,7 +206,6 @@ header {
 }
 
 #modal-guessed-copy-button:hover {
-    background-color: #a8a8a8;
     scale: 103%;
 }
 
@@ -285,7 +283,6 @@ header {
 
 #generate-input-button:hover, #generate-random-button:hover {
     cursor: pointer;
-    background-color: #a8a8a8;
     scale: 103%;
     transition: 40ms ease-in-out;
 }
