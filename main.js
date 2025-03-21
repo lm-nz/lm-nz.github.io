@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("Loading game...")
     createSquares();
 
     let gameFinised = false;
     let enterCooldown= false;
 
     const queryString = window.location.search;
+    console.log("Grabbing word...")
     const urlParams = new URLSearchParams(queryString);
 
 
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let answer_decrypted = ""
 
 
-    answer_decrypted = "";
+    console.log("Decrypting word...")
     if (answer_encrypted == null) {
         let wordNotSetModal = document.getElementById("modal-no-word-set");
         wordNotSetModal.style.visibility = "hidden";
@@ -72,11 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const keys = document.querySelectorAll(".keyboard-row button");
 
+    console.log("Ready!")
+
 
     function getCurrentWordArray() {
         const numberOfGuesses = guessedWords.length
         return guessedWords[numberOfGuesses-1]
     }
+
 
     function updateGuessedWords(letter) {
         const currentWordArray = getCurrentWordArray()
@@ -119,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function handleSubmitWord() {
+        console.log("Checking guess...")
         enterKey = document.getElementById("key-enter");
         enterKey.disabled = true;
         let currentWordArray = getCurrentWordArray();
@@ -141,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         try {  
             if (!(guessableWords.includes(currentWord.toLowerCase())) && (currentWord != answer)) {
-                throw Error();
+                throw Error;
             }
 
             const firstLetterId = guessedWordCount * 5 + 1;
@@ -181,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enterKey.removeAttribute("disabled")
 
             if (currentWord == answer) {
+                console.log("Word guessed correctly!")
                 gameFinised = true;
                 for (let i=0; i<5; i++) {
                     results[guessedWordCount-1][i] = "🟩";
@@ -209,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             else if (guessedWordCount == 6) {
+                console.log("Word not guessed")
                 setTimeout(() => {
                     let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
                     wordNotGuessedModal.style.visibility = "hidden";
@@ -228,11 +236,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 300)
                 
             }
+            else {
+                console.log("Guess is incorrect")
+            }
 
             guessedWords.push([]);
         }
-        catch (e){
-            console.log(e);
+        catch {
+            console.log("Guessed word not found!");
             let wordNotFoundModal = document.getElementById("modal-word-not-found");
             wordNotFoundModal.style.visibility = "hidden";
             wordNotFoundModal.classList.add("animate__animated");

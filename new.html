@@ -19,6 +19,7 @@
 </style>
 <script>
     function encrypt(doRandom=false) {
+        console.log("Encrypting word...");
         let answer_decrypted = document.getElementById("generate-input").value.toLowerCase();
         if (doRandom) {
             random = Math.floor(Math.random() * wordList.length)
@@ -59,9 +60,12 @@
         }
 
         if (answer_decrypted.length == 5){
+            console.log("Preparing game...")
             window.open(`./?word=${answer_encrypted}`);
+            console.log("Game opened!")
             return
         }
+        console.log("Provided word too short!");
         let wordNotFoundModal = document.getElementById("modal-word-too-short");
         wordNotFoundModal.style.visibility = "hidden";
         wordNotFoundModal.classList.add("animate__animated");
