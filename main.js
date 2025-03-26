@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             guessedWords.push([]);
         }
-        catch {
+        catch (e) {
             console.log("Guessed word not found!");
             let wordNotFoundModal = document.getElementById("modal-word-not-found");
             wordNotFoundModal.style.visibility = "hidden";
