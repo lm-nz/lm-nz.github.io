@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
             guessedWords.push([]);
 
             board = document.getElementById("board-container") 
-            board.style = `transition: 3s; rotate: ${rotation += 15}deg;`
+            board.style = `transition: 3s; rotate: ${rotation += 30}deg;`
 
         }
         catch (e) {
