@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let gameFinised = false;
     let enterCooldown= false;
 
+    let rotation = 0;
+
     const queryString = window.location.search;
     console.log("Grabbing word...")
     const urlParams = new URLSearchParams(queryString);
@@ -241,8 +243,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             guessedWords.push([]);
+
+            board = document.getElementById("board-container") 
+            board.style = `transition: 3s; rotate: ${rotation += 30}deg;`
+
         }
         catch (e) {
+            console.log(e)
             console.log("Guessed word not found!");
             let wordNotFoundModal = document.getElementById("modal-word-not-found");
             wordNotFoundModal.style.visibility = "hidden";
