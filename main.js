@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let gameFinised = false;
     let enterCooldown= false;
 
-    let rotation = 0;
-
     const queryString = window.location.search;
     console.log("Grabbing word...")
     const urlParams = new URLSearchParams(queryString);
@@ -201,15 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                 });
                 setTimeout(() => {
-                    let board = document.getElementById("board");
-                    board.style = "transition: 3s; margin-top: 200%; rotate: 160deg;"; // APRIL FOOLS
-                    let keyboard = document.getElementById("keyboard-container")
-                    keyboard.style = "transition: 4s; margin-top: 130%; rotate: -350deg;"; // APRIL FOOLS
-                    let gameTitle = document.getElementById("game-title")
-                    gameTitle.style = "transition: 3s; margin-top: 340%; rotate: -30deg;"; // APRIL FOOLS
-                    let howToPlay = document.getElementById("how-to-play")
-                    howToPlay.style = "transition: 3s; margin-top: 190%; rotate: 45deg;"; // APRIL FOOLS
-
                     let wordGuessedModal = document.getElementById("modal-word-guessed");
                     wordGuessedModal.style.visibility = "hidden";
                     wordGuessedModal.classList.add("animate__animated");
@@ -228,15 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             else if (guessedWordCount == 6) {
                 console.log("Word not guessed")
-                let board = document.getElementById("board");
-                board.style = "transition: 3s; margin-top: 200%; rotate: 160deg;"; // APRIL FOOLS
-                let keyboard = document.getElementById("keyboard-container")
-                keyboard.style = "transition: 4s; margin-top: 130%; rotate: -350deg;"; // APRIL FOOLS
-                let gameTitle = document.getElementById("game-title")
-                gameTitle.style = "transition: 3s; margin-top: 340%; rotate: -30deg;"; // APRIL FOOLS
-                let howToPlay = document.getElementById("how-to-play")
-                howToPlay.style = "transition: 3s; margin-top: 190%; rotate: 45deg;"; // APRIL FOOLS
-
                 setTimeout(() => {
                     let wordNotGuessedModal = document.getElementById("modal-word-not-guessed");
                     wordNotGuessedModal.style.visibility = "hidden";
@@ -261,9 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             guessedWords.push([]);
-
-            board = document.getElementById("board-container") 
-            board.style = `transition: 3s; rotate: ${rotation += 30}deg;` // APRIL FOOLs
 
         }
         catch (e) {
